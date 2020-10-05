@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tip Calc V1</title>
+
+	<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
+		h2{
+			text-align: center;
+			font: 28px bold Verdana;
+			margin-top: 20px;
+			padding: 10px;
+			margin-bottom: 10px;
+			text-transform: uppercase;
+		}
+		div{
+			text-align: center;
+			padding: 20px;
+		}
+		div>label{
+			font: 25px bold Impact, Charcoal, sans-serif;
+			text-transform: uppercase;
+			padding: 10px;
+		}
+		div>input{
+			padding: 10px;
+			width: 15%;
+			margin-bottom: 30px;
+			margin-top: 20px;
+		}
+		button{
+			padding: 10px 20px;
+			margin: 10px 20px;
+			border-radius: 7px;
+			background: black;
+			color: aliceblue;
+			font: 22px tahoma;
+		}
+		button:hover{
+			background-color: aliceblue;
+			color: black;
+		}
+
+	</style>
+</head>
+<body>
+
+	<h2>Your total Expenses are: <span id="displayExpenses"></span></h2>
+	<h2>You are to tip : <span id="displayTip"></span></h2>
+		<hr>
+	<div>
+		<label for="totalExpenses"> Total Expenses</label>
+		<input type="text" placeholder="total Expenses" id="totalExpenses">
+		<br>
+		<label for="serviceRating">rate the service</label>
+		<input type="text" placeholder="on a scale of 1 - 10" id="serviceRating">
+		<br>
+		<button onclick="tip()">submit</button>
+		<button onclick="newTip()">Reload</button>
+
+	</div>
+
+
+
+	<script type="text/javascript">
+
+	function tip(){
+		let totalExpenses = parseInt(document.getElementById("totalExpenses").value);
+		let serviceRating = parseInt(document.getElementById("serviceRating").value);
+
+		if(totalExpenses == "" && isNaN(totalExpenses)){
+			alert("only number inputs are allowed for expenses")
+		}else if(serviceRating == "" && isNaN(serviceRating)){
+			alert("only number inputs are allowed for ratings")
+		}else{
+			document.getElementById("displayExpenses").innerHTML = totalExpenses;
+			let tip = (serviceRating >=1 && serviceRating<=3 ? totalExpenses*0.03:
+			(serviceRating >=4 && serviceRating<=5 ? totalExpenses*0.05:
+			(serviceRating >=6 && serviceRating<=7 ? totalExpenses*0.07:
+			(serviceRating >=8 && serviceRating<=10 ? totalExpenses*0.95: "0"))));
+			document.getElementById("displayTip").innerHTML = tip
+
+			document.getElementById("totalExpenses").value = "";
+			document.getElementById("serviceRating").value = "";
+		}
+
+	}
+	function newTip(){
+		window.location = "";
+	}
+
+	</script>
+</body>
+</html>
